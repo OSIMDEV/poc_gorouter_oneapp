@@ -23,3 +23,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - fonts/
+
+  fonts:
+    - family: OsimIcons
+      fonts:
+        - asset: fonts/OsimIcons.otf

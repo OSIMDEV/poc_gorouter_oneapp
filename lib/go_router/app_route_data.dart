@@ -50,6 +50,13 @@ class AppShellRouteData extends StatefulShellRouteData {
   ) {
     return AppNavigationBar(
       navigationShell: navigationShell,
+      onItemSelected: (tabItem) {
+        final index = tabItem.index;
+        navigationShell.goBranch(
+          index,
+          initialLocation: index == navigationShell.currentIndex,
+        );
+      },
     );
   }
 }
