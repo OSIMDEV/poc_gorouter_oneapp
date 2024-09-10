@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:one_app/consts/constants.dart';
-import 'package:one_app/go_router/app_router.dart';
+import 'package:one_app/viewmodels/root_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,19 +14,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider.value(value: goRouter),
+        ChangeNotifierProvider(create: (_) => RootViewModel()),
       ],
       builder: (cxt, __) {
-        final router = cxt.watch<GoRouter>();
+        final rootVm = cxt.watch<RootViewModel>();
         return MaterialApp.router(
           title: appName,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          routeInformationProvider: router.routeInformationProvider,
-          routeInformationParser: router.routeInformationParser,
-          routerDelegate: router.routerDelegate,
+          routeInformationProvider: rootVm.router.routeInformationProvider,
+          routeInformationParser: rootVm.router.routeInformationParser,
+          routerDelegate: rootVm.router.routerDelegate,
         );
       },
     );

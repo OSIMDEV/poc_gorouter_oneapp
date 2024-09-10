@@ -1,24 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:one_app/go_router/route_paths.dart';
 
-/// The tabs on home page.
+/// The tabs on page.
 enum TabItem {
-  product('device_nav'),
-  wellBeing('wellbeing_nav'),
-  profile('profile_nav');
+  product(RoutePaths.product),
+  wellBeing(RoutePaths.wellbeing),
+  profile(RoutePaths.profile);
 
   const TabItem(this.dataValue);
 
   final String dataValue;
 }
 
-class TabViewModel extends ChangeNotifier {
-  /// The current showing page on the homepage.
+class TabViewModel {
+  /// The current showing page.
   TabItem get currentItem => _item;
   var _item = TabItem.wellBeing;
 
-  /// Set the home page to the selected tab
+  /// Set the page to the selected tab
   void selectItem(TabItem item) {
     _item = item;
-    notifyListeners();
   }
 }

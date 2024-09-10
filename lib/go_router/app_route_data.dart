@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_app/components/app_navigation_bar.dart';
 import 'package:one_app/consts/constants.dart';
-import 'package:one_app/go_router/routes.dart';
+import 'package:one_app/go_router/route_paths.dart';
 import 'package:one_app/tab_pages/product_page.dart';
 import 'package:one_app/tab_pages/profile_page.dart';
 import 'package:one_app/tab_pages/wellbeing_page.dart';
@@ -14,7 +14,7 @@ part 'app_route_data.g.dart';
     TypedStatefulShellBranch<ProductBranch>(
       routes: [
         TypedGoRoute<ProductRouteData>(
-          path: Routes.productWithPrefixSlash,
+          path: RoutePaths.productWithPrefixSlash,
           routes: [],
         ),
       ],
@@ -22,7 +22,7 @@ part 'app_route_data.g.dart';
     TypedStatefulShellBranch<WellbeingBranch>(
       routes: [
         TypedGoRoute<WellbeingRouteData>(
-          path: Routes.wellbeingWithPrefixSlash,
+          path: RoutePaths.wellbeingWithPrefixSlash,
           routes: [],
         ),
       ],
@@ -30,7 +30,7 @@ part 'app_route_data.g.dart';
     TypedStatefulShellBranch<ProfileBranch>(
       routes: [
         TypedGoRoute<ProfileRouteData>(
-          path: Routes.profileWithPrefixSlash,
+          path: RoutePaths.profileWithPrefixSlash,
           routes: [],
         ),
       ],
@@ -40,7 +40,7 @@ part 'app_route_data.g.dart';
 class AppShellRouteData extends StatefulShellRouteData {
   const AppShellRouteData();
 
-  static final $navigatorKey = globalKeys[Routes.root];
+  static final $navigatorKey = globalKeys[RoutePaths.root];
 
   @override
   Widget builder(
@@ -64,19 +64,19 @@ class AppShellRouteData extends StatefulShellRouteData {
 class ProductBranch extends StatefulShellBranchData {
   const ProductBranch();
 
-  static final $navigatorKey = globalKeys[Routes.product];
+  static final $navigatorKey = globalKeys[RoutePaths.product];
 }
 
 class WellbeingBranch extends StatefulShellBranchData {
   const WellbeingBranch();
 
-  static final $navigatorKey = globalKeys[Routes.wellbeing];
+  static final $navigatorKey = globalKeys[RoutePaths.wellbeing];
 }
 
 class ProfileBranch extends StatefulShellBranchData {
   const ProfileBranch();
 
-  static final $navigatorKey = globalKeys[Routes.profile];
+  static final $navigatorKey = globalKeys[RoutePaths.profile];
 }
 
 class ProductRouteData extends GoRouteData {

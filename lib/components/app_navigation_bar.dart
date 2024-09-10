@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:one_app/components/nav_bar.dart';
 import 'package:one_app/osim_keys.dart';
 import 'package:one_app/themes/osim_icons.dart';
+import 'package:one_app/viewmodels/root_viewmodel.dart';
 import 'package:one_app/viewmodels/tab_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -17,18 +18,12 @@ class AppNavigationBar extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
   @override
-  Widget build(BuildContext context) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (context) => TabViewModel(),
-            ),
-          ],
-          builder: (_, __) => Scaffold(
-                body: navigationShell,
-                bottomNavigationBar: _NavBarView(
-                  onItemSelected: onItemSelected,
-                ),
-              ));
+  Widget build(BuildContext context) => Scaffold(
+        body: navigationShell,
+        bottomNavigationBar: _NavBarView(
+          onItemSelected: onItemSelected,
+        ),
+      );
 }
 
 class _NavBarView extends StatelessWidget {
@@ -40,14 +35,14 @@ class _NavBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<TabViewModel>();
+    final vm = context.watch<RootViewModel>();
     return NavBar(
       onTap: (index) {
         final tabItem = TabItem.values[index];
         onItemSelected?.call(tabItem);
-        viewModel.selectItem(tabItem);
+        vm.selectItem(tabItem);
       },
-      currentIndex: viewModel.currentItem.index,
+      currentIndex: vm.currentItem.index,
       items: [
         NavBarItem(
           icon: OsimIcons.devices,

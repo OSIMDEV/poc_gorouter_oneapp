@@ -1,4 +1,4 @@
-mixin Routes {
+mixin RoutePaths {
   static const String root = '';
   static const String product = 'product';
   static const String wellbeing = 'wellbeing';
@@ -8,4 +8,16 @@ mixin Routes {
   static const String productWithPrefixSlash = '/product';
   static const String wellbeingWithPrefixSlash = '/wellbeing';
   static const String profileWithPrefixSlash = '/profile';
+
+  static const tabPathIndices = [
+    product,
+    wellbeing,
+    profile,
+  ];
+
+  static const tabPaths = <String, String>{
+    product: productWithPrefixSlash,
+    wellbeing: wellbeingWithPrefixSlash,
+    profile: profileWithPrefixSlash,
+  };
 }
