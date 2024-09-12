@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:one_app/components/app_navigation_bar.dart';
 import 'package:one_app/consts/constants.dart';
 import 'package:one_app/go_router/route_paths.dart';
+import 'package:one_app/products/product_detail_page.dart';
+import 'package:one_app/profile/faq_page.dart';
 import 'package:one_app/tab_pages/product_page.dart';
 import 'package:one_app/tab_pages/profile_page.dart';
 import 'package:one_app/tab_pages/wellbeing_page.dart';
@@ -15,7 +17,12 @@ part 'app_route_data.g.dart';
       routes: [
         TypedGoRoute<ProductRouteData>(
           path: RoutePaths.productWithPrefixSlash,
-          routes: [],
+          routes: [
+            TypedGoRoute<ProductDetailRouteData>(
+                path: RoutePaths.productDetail,
+                name: RoutePaths.productDetail,
+                routes: [])
+          ],
         ),
       ],
     ),
@@ -23,6 +30,7 @@ part 'app_route_data.g.dart';
       routes: [
         TypedGoRoute<WellbeingRouteData>(
           path: RoutePaths.wellbeingWithPrefixSlash,
+          name: RoutePaths.wellbeing,
           routes: [],
         ),
       ],
@@ -31,6 +39,7 @@ part 'app_route_data.g.dart';
       routes: [
         TypedGoRoute<ProfileRouteData>(
           path: RoutePaths.profileWithPrefixSlash,
+          name: RoutePaths.profile,
           routes: [],
         ),
       ],
@@ -50,13 +59,6 @@ class AppShellRouteData extends StatefulShellRouteData {
   ) {
     return AppNavigationBar(
       navigationShell: navigationShell,
-      onItemSelected: (tabItem) {
-        final index = tabItem.index;
-        navigationShell.goBranch(
-          index,
-          initialLocation: index == navigationShell.currentIndex,
-        );
-      },
     );
   }
 }
@@ -103,5 +105,33 @@ class ProfileRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const ProfilePage();
+  }
+}
+
+class ProductDetailRouteData extends GoRouteData {
+  final String productId;
+
+  const ProductDetailRouteData(this.productId);
+
+  static final $parentNavigatorKey = globalKeys[RoutePaths.root];
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ProductDetailPage(
+      productId: productId,
+    );
+  }
+}
+
+@TypedGoRoute<FAQRouteData>(
+    path: RoutePaths.faqPrefixSlash,
+    name: RoutePaths.faqPrefixSlash,
+    routes: [])
+class FAQRouteData extends GoRouteData {
+  const FAQRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const FAQPage();
   }
 }

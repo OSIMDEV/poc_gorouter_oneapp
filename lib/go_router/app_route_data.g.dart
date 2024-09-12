@@ -8,6 +8,7 @@ part of 'app_route_data.dart';
 
 List<RouteBase> get $appRoutes => [
       $appShellRouteData,
+      $fAQRouteData,
     ];
 
 RouteBase get $appShellRouteData => StatefulShellRouteData.$route(
@@ -19,6 +20,15 @@ RouteBase get $appShellRouteData => StatefulShellRouteData.$route(
             GoRouteData.$route(
               path: '/product',
               factory: $ProductRouteDataExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'productDetail',
+                  name: 'productDetail',
+                  parentNavigatorKey:
+                      ProductDetailRouteData.$parentNavigatorKey,
+                  factory: $ProductDetailRouteDataExtension._fromState,
+                ),
+              ],
             ),
           ],
         ),
@@ -27,6 +37,7 @@ RouteBase get $appShellRouteData => StatefulShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/wellbeing',
+              name: 'wellbeing',
               factory: $WellbeingRouteDataExtension._fromState,
             ),
           ],
@@ -36,6 +47,7 @@ RouteBase get $appShellRouteData => StatefulShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/profile',
+              name: 'profile',
               factory: $ProfileRouteDataExtension._fromState,
             ),
           ],
@@ -54,6 +66,29 @@ extension $ProductRouteDataExtension on ProductRouteData {
 
   String get location => GoRouteData.$location(
         '/product',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ProductDetailRouteDataExtension on ProductDetailRouteData {
+  static ProductDetailRouteData _fromState(GoRouterState state) =>
+      ProductDetailRouteData(
+        state.uri.queryParameters['product-id']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/product/productDetail',
+        queryParams: {
+          'product-id': productId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -90,6 +125,29 @@ extension $ProfileRouteDataExtension on ProfileRouteData {
 
   String get location => GoRouteData.$location(
         '/profile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $fAQRouteData => GoRouteData.$route(
+      path: '/faq',
+      name: '/faq',
+      factory: $FAQRouteDataExtension._fromState,
+    );
+
+extension $FAQRouteDataExtension on FAQRouteData {
+  static FAQRouteData _fromState(GoRouterState state) => const FAQRouteData();
+
+  String get location => GoRouteData.$location(
+        '/faq',
       );
 
   void go(BuildContext context) => context.go(location);

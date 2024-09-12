@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:one_app/consts/constants.dart';
+import 'package:one_app/products/product_viewmodel.dart';
+import 'package:one_app/profile/profile_viewmodel.dart';
 import 'package:one_app/viewmodels/root_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => RootViewModel()),
+        ChangeNotifierProvider(create: (_) => ProductViewModel()),
+        ChangeNotifierProvider(create: (_) => ProfileViewModel()),
       ],
       builder: (cxt, __) {
         final rootVm = cxt.watch<RootViewModel>();
